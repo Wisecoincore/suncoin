@@ -1,0 +1,36 @@
+src/*.exe
+src/suncoin
+src/suncoind
+src/test_suncoin
+.*.swp
+*.*~*
+*.bak
+*.rej
+*.orig
+*.o
+*.patch
+.suncoin
+
+# Compilation and Qt preprocessor part
+*.qm
+Makefile
+suncoin-qt
+suncoin-Qt.app
+
+# Unit-tests
+Makefile.test
+suncoin-qt_test
+
+# Resources cpp
+qrc_*.cpp
+
+# Qt creator
+*.pro.user
+
+# Mac specific
+.DS_Store
+.AppleDouble
+.LSOverride
+build
+
+!src/leveldb-*/Makefile

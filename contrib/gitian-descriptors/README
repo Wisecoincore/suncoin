@@ -29,3 +29,5 @@ Once you've got the right hardware and software:
     cd ../gitian-builder
     git pull
     ./bin/gbuild --commit bitcoin=HEAD ../bitcoin/contrib/gitian.yml
+
+    ./bin/gbuild --commit sun-git=HEAD ../suncoin/contrib/gitian-descriptors/gitian-win32.yml

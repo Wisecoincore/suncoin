@@ -788,6 +788,45 @@ bool AppInit2()
         Sleep(5000);
 #endif
 
+
+
+    // Genesis block
+    const char* pszTimestamp = "Apple removes Blockchain, last Bitcoin wallet app, from iOS App Store (pcworld)";
+    CTransaction txNew;
+    txNew.vin.resize(1);
+    txNew.vout.resize(1);
+    txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+    txNew.vout[0].nValue = S_GENESIS;
+    txNew.vout[0].scriptPubKey = CScript() << ParseHex("04080f32a008abb49cc93fb6d23514954e78081a72f26e96163c5218a41888ff21f41ca190603168f00d6d3ed72a4cf7d9f395a82bf2f7c2a5cf60357921a4648c") << OP_CHECKSIG; // a privkey for that 'vanity' pubkey would be interesting ;)
+    CBlock block;
+    block.vtx.push_back(txNew);
+    block.hashPrevBlock = 0;
+    block.hashMerkleRoot = block.BuildMerkleTree();
+    block.nVersion = 1;
+    block.nTime    = 1391740188; //epochtime
+    block.nBits    = 0x1e0ffff0;
+    block.nNonce   = 1751334;
+
+    uint256 genesisHash("0xe9fa4ca452a0fb59f8273fdd73c4dee3cf9b17d615f9e0b24f0b9bd20281f9b3");
+    uint256 hash = txNew.GetHash();
+
+{
+    LOCK(mempool.cs);
+    mempool.addUnchecked(hash,txNew);
+}
+
+{
+    CTxDB txdb;
+    txdb.TxnBegin();
+    CBlockIndex* pindex = mapBlockIndex.find(genesisHash)->second;
+    unsigned int nTxPos = pindex->nBlockPos + ::GetSerializeSize(CBlock(), SER_DISK, CLIENT_VERSION) - 1 + GetSizeOfCompactSize(block.vtx.size());
+    CDiskTxPos posThisTx(pindex->nFile, pindex->nBlockPos, nTxPos);
+    txdb.UpdateTxIndex(txNew.GetHash(), CTxIndex(posThisTx, txNew.vout.size()));
+    txdb.TxnCommit();
+}
+
+
+
     return true;
 }
 

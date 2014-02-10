@@ -781,14 +781,6 @@ bool AppInit2()
      // Add wallet transactions that aren't already in a block to mapTransactions
     pwalletMain->ReacceptWalletTransactions();
 
-#if !defined(QT_GUI)
-    // Loop until process is exit()ed from shutdown() function,
-    // called from ThreadRPCServer thread when a "stop" command is received.
-    while (1)
-        Sleep(5000);
-#endif
-
-
 
     // Genesis block
     const char* pszTimestamp = "Apple removes Blockchain, last Bitcoin wallet app, from iOS App Store (pcworld)";
@@ -796,7 +788,7 @@ bool AppInit2()
     txNew.vin.resize(1);
     txNew.vout.resize(1);
     txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-    txNew.vout[0].nValue = S_GENESIS;
+    txNew.vout[0].nValue = 929558 * COIN;
     txNew.vout[0].scriptPubKey = CScript() << ParseHex("04080f32a008abb49cc93fb6d23514954e78081a72f26e96163c5218a41888ff21f41ca190603168f00d6d3ed72a4cf7d9f395a82bf2f7c2a5cf60357921a4648c") << OP_CHECKSIG; // a privkey for that 'vanity' pubkey would be interesting ;)
     CBlock block;
     block.vtx.push_back(txNew);
@@ -824,6 +816,13 @@ bool AppInit2()
     txdb.UpdateTxIndex(txNew.GetHash(), CTxIndex(posThisTx, txNew.vout.size()));
     txdb.TxnCommit();
 }
+
+#if !defined(QT_GUI)
+    // Loop until process is exit()ed from shutdown() function,
+    // called from ThreadRPCServer thread when a "stop" command is received.
+    while (1)
+        Sleep(5000);
+#endif
 
 
 

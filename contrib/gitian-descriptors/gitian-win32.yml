@@ -18,7 +18,6 @@ files:
 - "qt-win32-4.7.4-gitian.zip"
 - "boost-win32-1.49.0-gitian2.zip"
 - "litecoin-deps-0.0.4.zip"
-- "suncoin.zip"
 
 script: |
   #

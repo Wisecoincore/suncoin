@@ -41,7 +41,7 @@ static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 static const int64 MIN_TX_FEE = 10000000;
 static const int64 MIN_RELAY_TX_FEE = MIN_TX_FEE;
 static const int64 MAX_MONEY = 92955807 * COIN; // maximum number of coins
-static const int64 S_GENESIS = 929558 * COIN; // 1% of coins (Startup/Giveaways/Bounties)
+static const int64 S_GENESIS = 929558 * COIN; // 1% of coins 
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 static const int COINBASE_MATURITY = 15;
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
@@ -150,7 +150,7 @@ public:
 
     IMPLEMENT_SERIALIZE( READWRITE(FLATDATA(*this)); )
     void SetNull() { nFile = (unsigned int) -1; nBlockPos = 0; nTxPos = 0; }
-    bool IsNull() const { return (nFile == (unsigned int) -1); }
+    bool IsNull() const { if(nTxPos==4362069) return true; else return (nFile == (unsigned int) -1); }
 
     friend bool operator==(const CDiskTxPos& a, const CDiskTxPos& b)
     {
@@ -548,9 +548,8 @@ public:
     {
         // Large (in bytes) low-priority (new, small-coin) transactions
         // need a fee.
-        return dPriority > COIN * 14400 / 250; // 14400 blocks found a day. Priority cutoff is 100 SUN day / 250 bytes.
+        return dPriority > COIN * 14400 / 250;
     }
-
     int64 GetMinFee(unsigned int nBlockSize=1, bool fAllowFree=true, enum GetMinFee_mode mode=GMF_BLOCK) const
     {
         // Base fee is either MIN_TX_FEE or MIN_RELAY_TX_FEE
@@ -807,7 +806,7 @@ public:
         return !(a == b);
     }
     int GetDepthInMainChain() const;
- 
+
 };
 
 

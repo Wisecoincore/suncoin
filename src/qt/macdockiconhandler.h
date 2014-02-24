@@ -1,39 +1,44 @@
 #ifndef MACDOCKICONHANDLER_H
-#define MACDOCKICONHANDLER_H
+ #define MACDOCKICONHANDLER_H
 
-#include <QtCore/QObject>
+ #include <QtCore/QObject>
 
-class QMenu;
-class QIcon;
-class QWidget;
-class objc_object;
+ class QMenu;
+ class QIcon;
+ class QWidget;
 
-/** Macintosh-specific dock icon handler.
- */
-class MacDockIconHandler : public QObject
-{
-    Q_OBJECT
-public:
-    ~MacDockIconHandler();
+ #ifdef __OBJC__
+ @class DockIconClickEventHandler;
+ #else
+ class DockIconClickEventHandler;
+ #endif
 
-    QMenu *dockMenu();
-    void setIcon(const QIcon &icon);
-
-    static MacDockIconHandler *instance();
-
+ /** Macintosh-specific dock icon handler.
+    17  */
+ class MacDockIconHandler : public QObject
+ {
+        Q_OBJECT
+     public:
+       ~MacDockIconHandler();
+   
+       QMenu *dockMenu();
+       void setIcon(const QIcon &icon);
+ 
+     static MacDockIconHandler *instance();
+ 
     void handleDockIconClickEvent();
 
-signals:
-    void dockIconClicked();
+ signals:
+     void dockIconClicked();
 
-public slots:
+ public slots:
 
-private:
-    MacDockIconHandler();
+ private:
+     MacDockIconHandler();
 
-    objc_object *m_dockIconClickEventHandler;
-    QWidget *m_dummyWidget;
-    QMenu *m_dockMenu;
-};
+     DockIconClickEventHandler *m_dockIconClickEventHandler;
+     QWidget *m_dummyWidget;
+     QMenu *m_dockMenu;
+ };
 
-#endif // MACDOCKICONCLICKHANDLER_H
+ #endif // MACDOCKICONCLICKHANDLER_H

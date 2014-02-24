@@ -2,7 +2,6 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 The Litecoin Developers
 // Copyright (c) 2013 adam m.
-// Copyright (c) 2014 SUNCOIN Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -3099,7 +3098,7 @@ void ThreadRPCServer3(void* parg)
                 strReply = JSONRPCExecBatch(valRequest.get_array());
             else
                 throw JSONRPCError(-32700, "Top-level object parse error");
-                
+
             conn->stream() << HTTPReply(200, strReply, fRun) << std::flush;
         }
         catch (Object& objError)

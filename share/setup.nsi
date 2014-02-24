@@ -1,28 +1,28 @@
-Name SUNcoin
+Name SunCoin
 
 RequestExecutionLevel highest
 SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.6.3
-!define COMPANY "SUNcoin project"
+!define VERSION 0.0.2
+!define COMPANY "SunCoin project"
 !define URL http://www.suncoin.biz/
 
 # MUI Symbol Definitions
-!define MUI_ICON "../share/pixmaps/bitcoin.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "../share/pixmaps/nsis-wizard.bmp"
+!define MUI_ICON "pixmaps\bitcoin.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "pixmaps\nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "../share/pixmaps/nsis-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP "pixmaps\nsis-header.bmp"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER SUNcoin
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER SunCoin
 !define MUI_FINISHPAGE_RUN $INSTDIR\SUNcoin-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "../share/pixmaps/nsis-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "pixmaps\nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
@@ -45,14 +45,14 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile SUNcoin-0.6.3-win32-setup.exe
-InstallDir $PROGRAMFILES\Litecoin
+OutFile SUNcoin-win32-setup.exe
+InstallDir $PROGRAMFILES\SunCoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.6.3.0
-VIAddVersionKey ProductName SUNcoin
+VIProductVersion 0.1.1.0
+VIAddVersionKey ProductName SunCoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
@@ -66,11 +66,20 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    File ../release/SUNcoin-qt.exe
-    File /oname=license.txt ../COPYING
-    File /oname=readme.txt ../doc/README_windows.txt
+    File ..\release\SUNcoin-qt.exe
+	File ..\release\libgcc_s_dw2-1.dll
+	File ..\release\libstdc++-6.dll
+	File ..\release\mingwm10.dll
+	File ..\release\QtCore4.dll
+	File ..\release\QtGui4.dll
+	File ..\release\QtNetwork4.dll
+    File /oname=license.txt ..\COPYING
+    File /oname=readme.txt ..\doc\README_windows.txt
+	File ..\share\suncoin.conf
+	File ..\share\config.bat
+	ExecWait config.bat
     SetOutPath $INSTDIR\daemon
-    File ../src/suncoin.exe
+    File ..\src\suncoind.exe
     SetOutPath $INSTDIR\src
     File /r /x *.exe /x *.o ../src\*.*
     SetOutPath $INSTDIR
@@ -87,8 +96,8 @@ Section -post SEC0001
     WriteUninstaller $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\SUNcoin.lnk" $INSTDIR\SUNcoin-qt.exe
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall SUNcoin.lnk" $INSTDIR\uninstall.exe
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\SunCoin.lnk" $INSTDIR\SUNcoin-qt.exe
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall SunCoin.lnk" $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_END
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayVersion "${VERSION}"
@@ -98,10 +107,10 @@ Section -post SEC0001
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" UninstallString $INSTDIR\uninstall.exe
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
-    WriteRegStr HKCR "SUNcoin" "URL Protocol" ""
-    WriteRegStr HKCR "SUNcoin" "" "URL:Bitcoin"
-    WriteRegStr HKCR "SUNcoin\DefaultIcon" "" $INSTDIR\SUNcoin-qt.exe
-    WriteRegStr HKCR "SUNcoin\shell\open\command" "" '"$INSTDIR\SUNcoin-qt.exe" "$$1"'
+    WriteRegStr HKCR "litceoin" "URL Protocol" ""
+    WriteRegStr HKCR "suncoin" "" "URL:Bitcoin"
+    WriteRegStr HKCR "suncoin\DefaultIcon" "" $INSTDIR\SUNcoin-qt.exe
+    WriteRegStr HKCR "suncoin\shell\open\command" "" '"$INSTDIR\SUNcoin-qt.exe" "$$1"'
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -129,9 +138,9 @@ SectionEnd
 
 Section -un.post UNSEC0001
     DeleteRegKey HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall SUNcoin.lnk"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\SUNcoin.lnk"
-    Delete /REBOOTOK "$SMSTARTUP\SUNcoin.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall SunCoin.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\SunCoin.lnk"
+    Delete /REBOOTOK "$SMSTARTUP\SunCoin.lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     Delete /REBOOTOK $INSTDIR\debug.log
     Delete /REBOOTOK $INSTDIR\db.log
@@ -139,7 +148,7 @@ Section -un.post UNSEC0001
     DeleteRegValue HKCU "${REGKEY}" Path
     DeleteRegKey /IfEmpty HKCU "${REGKEY}\Components"
     DeleteRegKey /IfEmpty HKCU "${REGKEY}"
-    DeleteRegKey HKCR "SUNcoin"
+    DeleteRegKey HKCR "suncoin"
     RmDir /REBOOTOK $SMPROGRAMS\$StartMenuGroup
     RmDir /REBOOTOK $INSTDIR
     Push $R0

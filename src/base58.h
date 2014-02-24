@@ -410,7 +410,7 @@ public:
     };
 
     void SetSecret(const CSecret& vchSecret, bool fCompressed)
-    { 
+    {
         assert(vchSecret.size() == 32);
         SetData(fTestNet ? PRIVKEY_ADDRESS_TEST : PRIVKEY_ADDRESS, &vchSecret[0], vchSecret.size());
         if (fCompressed)

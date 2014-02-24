@@ -13,6 +13,7 @@
   <property name="windowTitle">
    <string>Options</string>
   </property>
+  
   <property name="modal">
    <bool>true</bool>
   </property>
@@ -23,7 +24,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabMain">
       <attribute name="title">
@@ -210,19 +211,6 @@
            </property>
           </widget>
          </item>
-         <item>
-          <spacer name="horizontalSpacer_Network">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
         </layout>
        </item>
        <item>
@@ -379,8 +367,9 @@
       <widget class="QLabel" name="statusLabel">
        <property name="font">
         <font>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Helvetica Neue</family>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
@@ -449,6 +438,7 @@
    <class>BitcoinAmountField</class>
    <extends>QSpinBox</extends>
    <header>bitcoinamountfield.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>QValueComboBox</class>

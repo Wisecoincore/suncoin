@@ -1014,7 +1014,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>123.456 BTC</source>
+        <source>123.456 SUN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -1,29 +1,31 @@
 # Copyright (c) 2009-2010 Satoshi Nakamoto
+# Copyright (c) 2014 SmartCoin Developers
+# Copyright (c) 2014 SunCoin Developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-USE_UPNP:=0
+USE_UPNP=-
 
 INCLUDEPATHS= \
- -I"C:\deps\boost" \
- -I"C:\deps\db\build_unix" \
- -I"C:\deps\ssl\include"
+ -I"C:\deps\boost_1_54_0" \
+ -I"C:\deps\db-4.8.30.NC\build_unix" \
+ -I"C:\deps\openssl-1.0.1e\include"
 
 LIBPATHS= \
- -L"C:\deps\boost\stage\lib" \
- -L"C:\deps\db\build_unix" \
- -L"C:\deps\ssl"
+ -L"C:\deps\boost_1_54_0\stage\lib" \
+ -L"C:\deps\db-4.8.30.NC\build_unix" \
+ -L"C:\deps\openssl-1.0.1e"
 
 LIBS= \
- -l boost_system-mgw46-mt-s-1_49 \
- -l boost_filesystem-mgw46-mt-s-1_49 \
- -l boost_program_options-mgw46-mt-s-1_49 \
- -l boost_thread-mgw46-mt-s-1_49 \
+ -l boost_system-mgw46-mt-1_54 \
+ -l boost_filesystem-mgw46-mt-1_54 \
+ -l boost_program_options-mgw46-mt-1_54 \
+ -l boost_thread-mgw46-mt-1_54 \
  -l db_cxx \
  -l ssl \
  -l crypto
 
-DEFS=-DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE -DUSE_IPV6 -D__NO_SYSTEM_INCLUDES
+DEFS=-DWIN32 -DWIN32_LEAN_AND_MEAN -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE -DUSE_IPV6 -D__NO_SYSTEM_INCLUDES
 DEBUGFLAGS=-g
 CFLAGS=-mthreads -O2 -w -Wall -Wextra -Wformat -Wformat-security -Wno-unused-parameter $(DEBUGFLAGS) $(DEFS) $(INCLUDEPATHS)
 
@@ -63,7 +65,7 @@ OBJS= \
     obj/noui.o
 
 
-all: suncoin.exe
+all: suncoind.exe
 
 obj/scrypt.o: scrypt.c
 	gcc -c $(CFLAGS) -o $@ $^
@@ -71,19 +73,10 @@ obj/scrypt.o: scrypt.c
 obj/%.o: %.cpp $(HEADERS)
 	g++ -c $(CFLAGS) -o $@ $<
 
-suncoin.exe: $(OBJS:obj/%=obj/%)
+suncoind.exe: $(OBJS:obj/%=obj/%)
 	g++ $(CFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
-TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
-
-obj-test/%.o: test/%.cpp $(HEADERS)
-	g++ -c $(TESTDEFS) $(CFLAGS) -o $@ $<
-
-test_suncoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
-	g++ $(CFLAGS) -o $@ $(LIBPATHS) $^ -lboost_unit_test_framework $(LIBS)
-
 clean:
-	-del /Q suncoin test_suncoin
+	-del /Q suncoind
 	-del /Q obj\*
-	-del /Q obj-test\*
 	-del /Q build.h

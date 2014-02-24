@@ -7,17 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>450</height>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>SunCoin - Debug window</string>
   </property>
+  
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_info">
       <attribute name="title">
@@ -31,12 +32,13 @@
         <widget class="QLabel" name="label_9">
          <property name="font">
           <font>
-           <weight>75</weight>
-           <bold>true</bold>
+           <family>Helvetica Neue</family>
+           <weight>12</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Bitcoin Core</string>
+          <string>SunCoin Core</string>
          </property>
         </widget>
        </item>
@@ -162,8 +164,9 @@
         <widget class="QLabel" name="label_11">
          <property name="font">
           <font>
-           <weight>75</weight>
-           <bold>true</bold>
+           <family>Helvetica Neue</family>
+           <weight>12</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
@@ -215,8 +218,9 @@
         <widget class="QLabel" name="label_10">
          <property name="font">
           <font>
-           <weight>75</weight>
-           <bold>true</bold>
+           <family>Helvetica Neue</family>
+           <weight>12</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
@@ -310,8 +314,9 @@
         <widget class="QLabel" name="labelDebugLogfile">
          <property name="font">
           <font>
-           <weight>75</weight>
-           <bold>true</bold>
+           <family>Helvetica Neue</family>
+           <weight>12</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
@@ -336,8 +341,9 @@
         <widget class="QLabel" name="labelCLOptions">
          <property name="font">
           <font>
-           <weight>75</weight>
-           <bold>true</bold>
+           <family>Helvetica Neue</family>
+           <weight>12</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
@@ -352,9 +358,6 @@
          </property>
          <property name="text">
           <string>&amp;Show</string>
-         </property>
-         <property name="autoDefault">
-          <bool>false</bool>
          </property>
          <property name="autoDefault">
           <bool>false</bool>

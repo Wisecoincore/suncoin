@@ -9,7 +9,7 @@ Now in our crypto-world we have something important that touches its base - SUN 
 SUN Coin Specification
 * Based on the Scrypt algorithm
 * 10 Coins per block (rare!)
-* 6 hour difficulty retargeting
+* instant difficulty retargeting thanks to Kimoto's Gravity Well
 * 60 Seconds Per Block
 * 92,955,807 Total coins (this is number of Miles to the Sun from Earth)
 

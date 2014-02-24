@@ -74,13 +74,13 @@ Value dumpprivkey(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-	    "dumpprivkey <suncoin address>\n"
-	    "Reveals the private key corresponding to <suncoin address>.");
+            "dumpprivkey <suncoin address>\n"
+            "Reveals the private key corresponding to <suncoin address>.");
 
     string strAddress = params[0].get_str();
     CBitcoinAddress address;
     if (!address.SetString(strAddress))
-	throw JSONRPCError(-5, "Invalid SunCoin address");
+        throw JSONRPCError(-5, "Invalid SunCoin address");
     CKeyID keyID;
     if (!address.GetKeyID(keyID))
         throw JSONRPCError(-3, "Address does not refer to a key");

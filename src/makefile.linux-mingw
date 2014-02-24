@@ -11,6 +11,7 @@ INCLUDEPATHS= \
  -I"$(DEPSDIR)/db-4.8.30.NC/build_unix" \
  -I"$(DEPSDIR)/openssl-1.0.1c/include" \
  -I"$(DEPSDIR)" \
+ -I"$(DEPSDIR)"/include \
  -I"$(CURDIR)"/obj \
 
 LIBPATHS= \

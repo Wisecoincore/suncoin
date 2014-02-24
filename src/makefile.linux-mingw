@@ -18,6 +18,7 @@ LIBPATHS= \
  -L"$(DEPSDIR)/boost_1_54_0/stage/lib" \
  -L"$(DEPSDIR)/db-4.8.30.NC/build_unix" \
  -L"$(DEPSDIR)/openssl-1.0.1c"
+ -L"$(DEPSDIR)/lib"
 
 LIBS= \
  -l boost_system-mt-s \

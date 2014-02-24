@@ -67,19 +67,19 @@ Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
     File ..\release\SUNcoin-qt.exe
-	File ..\release\libgcc_s_dw2-1.dll
-	File ..\release\libstdc++-6.dll
-	File ..\release\mingwm10.dll
-	File ..\release\QtCore4.dll
-	File ..\release\QtGui4.dll
-	File ..\release\QtNetwork4.dll
+	#File ..\release\libgcc_s_dw2-1.dll
+	#File ..\release\libstdc++-6.dll
+	#File ..\release\mingwm10.dll
+	#File ..\release\QtCore4.dll
+	#File ..\release\QtGui4.dll
+	#File ..\release\QtNetwork4.dll
     File /oname=license.txt ..\COPYING
     File /oname=readme.txt ..\doc\README_windows.txt
 	File ..\share\suncoin.conf
 	File ..\share\config.bat
 	ExecWait config.bat
     SetOutPath $INSTDIR\daemon
-    File ..\src\suncoind.exe
+    File ..\src\suncoin.exe
     SetOutPath $INSTDIR\src
     File /r /x *.exe /x *.o ../src\*.*
     SetOutPath $INSTDIR

@@ -61,5 +61,5 @@ script: |
   mkdir ../release
   cp ../../release/* ../release/
   cp ../../src/*.exe .
-  #makensis ../share/setup.nsi
-  #cp ../share/suncoin-*-win32-setup.exe $OUTDIR/
+  makensis ../share/setup.nsi
+  cp ../share/suncoin-*-win32-setup.exe $OUTDIR/

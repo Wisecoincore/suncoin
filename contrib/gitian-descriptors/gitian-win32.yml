@@ -50,10 +50,10 @@ script: |
   export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
   export FAKETIME=$REFERENCE_DATETIME
   export TZ=UTC
-  make -f makefile.linux-mingw $MAKEOPTS DEPSDIR=$STAGING suncoind.exe USE_UPNP=0 DEBUGFLAGS="-frandom-seed=suncoin" USE_SSE2=1
-  $HOST-strip suncoind.exe
+  make -f makefile.linux-mingw $MAKEOPTS DEPSDIR=$STAGING suncoin.exe USE_UPNP=0 DEBUGFLAGS="-frandom-seed=suncoin" USE_SSE2=1
+  $HOST-strip suncoin.exe
   mkdir $OUTDIR/daemon
-  cp suncoind.exe $OUTDIR/daemon
+  cp suncoin.exe $OUTDIR/daemon
   cd ..
   mkdir nsis
   git archive HEAD | tar -x -C nsis

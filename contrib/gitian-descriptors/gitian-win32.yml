@@ -62,4 +62,4 @@ script: |
   cp ../../release/* ../release/
   cp ../../src/*.exe .
   makensis ../share/setup.nsi
-  cp ../share/suncoin-*-win32-setup.exe $OUTDIR/
+  cp ../share/SUNcoin-win32-setup.exe $OUTDIR/
